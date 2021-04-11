@@ -37,10 +37,10 @@ let redisURL = {
 let redisPASS = '42ZZtdzBRiHxxx0LYifU7epzHZGG548D';
 if (process.env.REDISCLOUD_URL) {
   redisURL = url.parse(process.env.REDISCLOUD_URL);
-  [, redisPass] = redisURL.auth.split(':');
+  [, redisPASS] = redisURL.auth.split(':');
 }
 
-let redisClient = redis.createClient({
+const redisClient = redis.createClient({
   host: redisURL.hostname,
   port: redisURL.port,
   password: redisPASS,
@@ -78,7 +78,7 @@ app.use((err, req, res, next) => {
 
   console.log('Missing CSRF token');
   return false;
-})
+});
 
 
 router(app);
